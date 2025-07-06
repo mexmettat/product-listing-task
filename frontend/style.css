@@ -85,7 +85,29 @@ body {
 }
 
 .stars {
-  color: gold;
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.star {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.star.full {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.571 8.332 1.151-6.064 5.879 1.516 8.274L12 18.897l-7.452 4.565L6.064 15.19 0 9.31l8.332-1.151z"/></svg>');
+}
+
+.star.half {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><linearGradient id="half"><stop offset="50%" stop-color="gold"/><stop offset="50%" stop-color="lightgray"/></linearGradient></defs><path fill="url(%23half)" d="M12 .587l3.668 7.571 8.332 1.151-6.064 5.879 1.516 8.274L12 18.897l-7.452 4.565L6.064 15.19 0 9.31l8.332-1.151z"/></svg>');
+}
+
+.star.empty {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="lightgray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.571 8.332 1.151-6.064 5.879 1.516 8.274L12 18.897l-7.452 4.565L6.064 15.19 0 9.31l8.332-1.151z"/></svg>');
 }
 
 .filters {
@@ -113,6 +135,20 @@ body {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+.search-bar {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 0.5rem;
+  font-family: 'Montserrat';
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 300px;
 }
 
 @media screen and (max-width: 600px) {

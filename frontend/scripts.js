@@ -1,14 +1,70 @@
 const productList = document.getElementById("product-list");
+const searchInput = document.getElementById("search");
+const minPriceInput = document.getElementById("minPrice");
+const maxPriceInput = document.getElementById("maxPrice");
+const minScoreInput = document.getElementById("minScore");
+const applyBtn = document.getElementById("applyFilters");
 
-fetch("http://localhost:3000/products") // senin backend'in bu portta çalışıyorsa
-  .then(res => res.json())
-  .then(products => {
-    products.forEach(product => {
-      const card = createProductCard(product);
-      productList.appendChild(card);
+/**
+ * Fetches products from backend and displays them.
+ * If a query string is passed, filtered results are retrieved.
+ */
+function fetchAndDisplayProducts(query = "") {
+  productList.innerHTML = ""; // clear previous cards
+
+  fetch(`http://localhost:3000/products${query}`)
+    .then(res => res.json())
+    .then(products => {
+      console.log("Fetched products:", products);
+
+      if (products.length === 0) {
+        productList.innerHTML = "<p>No products found.</p>";
+        return;
+      }
+
+      products.forEach(product => {
+        const card = createProductCard(product);
+        productList.appendChild(card);
+      });
+    })
+    .catch(err => {
+      productList.innerHTML = "<p>Error loading products.</p>";
+      console.error(err);
     });
-  });
+}
 
+function createStarRating(score) {
+  const container = document.createElement("div");
+  container.className = "stars";
+
+  const fullStars = Math.floor(score);
+  const hasHalfStar = score % 1 >= 0.25 && score % 1 < 0.75;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+  for (let i = 0; i < fullStars; i++) {
+    const star = document.createElement("span");
+    star.className = "star full";
+    container.appendChild(star);
+  }
+
+  if (hasHalfStar) {
+    const star = document.createElement("span");
+    star.className = "star half";
+    container.appendChild(star);
+  }
+
+  for (let i = 0; i < emptyStars; i++) {
+    const star = document.createElement("span");
+    star.className = "star empty";
+    container.appendChild(star);
+  }
+
+  return container;
+}
+
+/**
+ * Generates a product card element based on the product data.
+ */
 function createProductCard(product) {
   const card = document.createElement("div");
   card.className = "card";
@@ -20,7 +76,7 @@ function createProductCard(product) {
   name.textContent = product.name;
 
   const price = document.createElement("p");
-  price.textContent = `$${product.price.toFixed(2)} USD`;
+  price.textContent = `$${product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
 
   const colors = document.createElement("div");
   colors.className = "color-picker";
@@ -38,8 +94,13 @@ function createProductCard(product) {
   const label = document.createElement("p");
   label.textContent = "Yellow Gold";
 
-  const rating = document.createElement("p");
-  rating.innerHTML = `<span class="stars">★</span> ${product.popularityOutOf5}/5`;
+  const rating = document.createElement("div");
+  rating.className = "rating";
+  rating.appendChild(createStarRating(product.popularityOutOf5));
+
+  const scoreText = document.createElement("span");
+  scoreText.textContent = ` ${product.popularityOutOf5}/5`;
+  rating.appendChild(scoreText);
 
   card.appendChild(img);
   card.appendChild(name);
@@ -51,6 +112,9 @@ function createProductCard(product) {
   return card;
 }
 
+/**
+ * Converts color keys to hex color codes.
+ */
 function getColorHex(color) {
   return {
     yellow: "#E5CA97",
@@ -59,6 +123,9 @@ function getColorHex(color) {
   }[color];
 }
 
+/**
+ * Converts color keys to readable labels.
+ */
 function getColorLabel(color) {
   return {
     yellow: "Yellow Gold",
@@ -67,16 +134,15 @@ function getColorLabel(color) {
   }[color];
 }
 
-// Carousel scroll
+// Scroll with arrows
 document.querySelector(".arrow.left").onclick = () => {
   productList.scrollBy({ left: -300, behavior: "smooth" });
 };
-
 document.querySelector(".arrow.right").onclick = () => {
   productList.scrollBy({ left: 300, behavior: "smooth" });
 };
 
-// swipe support (mobile)
+// Swipe support (desktop & mobile)
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -99,26 +165,31 @@ productList.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   const x = e.pageX - productList.offsetLeft;
-  const walk = (x - startX) * 2; // hız
+  const walk = (x - startX) * 2;
   productList.scrollLeft = scrollLeft - walk;
 });
 
-const searchInput = document.getElementById("search");
-const minPriceInput = document.getElementById("minPrice");
-const maxPriceInput = document.getElementById("maxPrice");
-const minScoreInput = document.getElementById("minScore");
-const applyBtn = document.getElementById("applyFilters");
-
+/**
+ * When Apply Filters button is clicked, collects input values and builds query string.
+ */
 applyBtn.addEventListener("click", () => {
   const query = [];
 
-  if (minPriceInput.value) query.push(`minPrice=${minPriceInput.value}`);
-  if (maxPriceInput.value) query.push(`maxPrice=${maxPriceInput.value}`);
-  if (minScoreInput.value) query.push(`minScore=${minScoreInput.value}`);
+  const minPrice = minPriceInput.value.trim();
+  const maxPrice = maxPriceInput.value.trim();
+  const minScore = minScoreInput.value.trim();
 
-  fetchAndDisplayProducts(`?${query.join("&")}`);
+  if (minPrice !== "") query.push(`minPrice=${minPrice}`);
+  if (maxPrice !== "") query.push(`maxPrice=${maxPrice}`);
+  if (minScore !== "") query.push(`minScore=${minScore}`);
+
+  const queryString = query.length > 0 ? `?${query.join("&")}` : "";
+  fetchAndDisplayProducts(queryString);
 });
 
+/**
+ * Filters currently displayed cards in the DOM based on the product name.
+ */
 searchInput.addEventListener("input", () => {
   const searchTerm = searchInput.value.toLowerCase();
   const cards = document.querySelectorAll(".card");
@@ -128,11 +199,5 @@ searchInput.addEventListener("input", () => {
   });
 });
 
-function fetchAndDisplayProducts(query = "") {
-  productList.innerHTML = ""; // önce temizle
-}
-
-// Sayfa açıldığında çağır
+// Load all products when page first loads
 fetchAndDisplayProducts();
-
-

@@ -9,13 +9,16 @@
 <body>
   <h1 class="title">Product List</h1>
 
-  <div class="filters">
+    <!-- Search bar -->
+  <div class="search-bar">
     <input type="text" id="search" placeholder="Search by product name..." />
-  
+  </div>
+
+    <!-- Filters below -->
+  <div class="filters"> 
     <input type="number" id="minPrice" placeholder="Min Price ($)" />
     <input type="number" id="maxPrice" placeholder="Max Price ($)" />
     <input type="number" step="0.1" max="5" min="0" id="minScore" placeholder="Min Score (out of 5)" />
-
   <button id="applyFilters">Apply Filters</button>
   </div>
 
