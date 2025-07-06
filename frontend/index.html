@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1 class="title">Product List</h1>
+
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search by product name..." />
+  
+    <input type="number" id="minPrice" placeholder="Min Price ($)" />
+    <input type="number" id="maxPrice" placeholder="Max Price ($)" />
+    <input type="number" step="0.1" max="5" min="0" id="minScore" placeholder="Min Score (out of 5)" />
+
+  <button id="applyFilters">Apply Filters</button>
+  </div>
+
+  <div class="carousel-container">
+    <button class="arrow left">&#10094;</button>
+    <div class="carousel" id="product-list">
+      <!-- Product cards will be injected here -->
+    </div>
+    <button class="arrow right">&#10095;</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
