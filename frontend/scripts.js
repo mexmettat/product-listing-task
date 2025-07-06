@@ -130,14 +130,6 @@ searchInput.addEventListener("input", () => {
 
 function fetchAndDisplayProducts(query = "") {
   productList.innerHTML = ""; // önce temizle
-  fetch(`http://localhost:3000/products${query}`)
-    .then(res => res.json())
-    .then(products => {
-      products.forEach(product => {
-        const card = createProductCard(product);
-        productList.appendChild(card);
-      });
-    });
 }
 
 // Sayfa açıldığında çağır
