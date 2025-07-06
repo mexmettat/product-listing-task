@@ -50,33 +50,6 @@ This project is a **Full Stack Product Listing Application** developed for the R
   - Minimum popularity score
 - Fully responsive layout
 
-## 📁 Folder Structure
-
-backend/
-├── index.js               - Express backend
-├── products.json          - Product data source
-└── package.json
-
-frontend/
-├── index.html             - Main frontend page
-├── style.css              - Responsive design
-├── scripts.js             - Frontend logic
-└── fonts/                 - Montserrat & Avenir custom fonts
-
-README.md                 - This file
-
-## ⚙️ Setup Instructions
-
-### Run Backend Locally
-cd backend  
-npm install  
-node index.js
-
-Backend runs at: http://localhost:3000/products
-
-### Run Frontend Locally
-Just open `frontend/index.html` in your browser (or deploy to Vercel as done in this project)
-
 ## 📄 Case Study Requirements Fulfilled
 
 - ✅ Mock REST API from JSON file
@@ -91,7 +64,7 @@ Just open `frontend/index.html` in your browser (or deploy to Vercel as done in 
 ## 👤 Developed By
 
 **Mehmet Tat**  
-Computer Engineering Student  
+Linkedn: https://www.linkedin.com/in/mehmettat/ 
 GitHub: https://github.com/mexmettat
 
 ---
