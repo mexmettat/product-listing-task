@@ -6,7 +6,7 @@ const axios = require('axios');
 const app = express();
 app.use(cors());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 /**
  * Fetches the real-time gold price in USD per gram using Coingecko's "tether-gold" endpoint.

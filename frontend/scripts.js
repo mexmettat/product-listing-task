@@ -12,7 +12,7 @@ const applyBtn = document.getElementById("applyFilters");
 function fetchAndDisplayProducts(query = "") {
   productList.innerHTML = ""; // clear previous cards
 
-  fetch(`http://localhost:3000/products${query}`)
+  fetch(`https://product-listing-task-kzem.onrender.com/products${query}`)
     .then(res => res.json())
     .then(products => {
       console.log("Fetched products:", products);
