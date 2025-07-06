@@ -5,6 +5,8 @@ const maxPriceInput = document.getElementById("maxPrice");
 const minScoreInput = document.getElementById("minScore");
 const applyBtn = document.getElementById("applyFilters");
 
+const API_URL = "https://product-listing-task-kzem.onrender.com";
+
 /**
  * Fetches products from backend and displays them.
  * If a query string is passed, filtered results are retrieved.
@@ -12,7 +14,7 @@ const applyBtn = document.getElementById("applyFilters");
 function fetchAndDisplayProducts(query = "") {
   productList.innerHTML = ""; // clear previous cards
 
-  fetch(`https://product-listing-task-kzem.onrender.com/products${query}`)
+  fetch(`${API_URL}/products${query}`)
     .then(res => res.json())
     .then(products => {
       console.log("Fetched products:", products);
