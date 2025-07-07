@@ -110,6 +110,15 @@ body {
   background-image: url('data:image/svg+xml;utf8,<svg fill="lightgray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.571 8.332 1.151-6.064 5.879 1.516 8.274L12 18.897l-7.452 4.565L6.064 15.19 0 9.31l8.332-1.151z"/></svg>');
 }
 
+.filters-box {
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;

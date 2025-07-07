@@ -83,5 +83,5 @@ app.get('/products', async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✅ API is running at http://localhost:${PORT}`);
+  console.log(`API is running at http://localhost:${PORT}`);
 });
