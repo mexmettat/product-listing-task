@@ -64,8 +64,8 @@ This project is a **Full Stack Product Listing Application** developed for the R
 ## 👤 Developed By
 
 **Mehmet Tat**  
-Linkedn: https://www.linkedin.com/in/mehmettat/ 
-GitHub: https://github.com/mexmettat
+- Linkedn: https://www.linkedin.com/in/mehmettat/ 
+- GitHub: https://github.com/mexmettat
 
 ---
 
