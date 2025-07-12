@@ -61,6 +61,17 @@ This project is a **Full Stack Product Listing Application** developed for the R
 - ✅ Search by name
 - ✅ Arrow and swipe-based carousel
 
+## 📷 Screenshots
+
+### Application
+![App Screenshot](screenshots/Screenshot_1.jpg)
+
+### Filtering
+![Filter of Product List](screenshots/Screenshot_2.jpg)
+
+### Search Bar
+![Search Product](screenshots/Screenshot_3.jpg)
+
 ## 👤 Developed By
 
 **Mehmet Tat**  
